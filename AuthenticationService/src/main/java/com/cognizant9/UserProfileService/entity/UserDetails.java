@@ -1,7 +1,16 @@
 /**
  * 
  */
-package com.cognizant9.AuthenticationService.entity;
+package com.cognizant9.UserProfileService.entity;
+
+/**
+ * @author mohit
+ *
+ */
+/**
+ * 
+ */
+
 
 /**
  * @author mohit
@@ -19,6 +28,9 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+
+import com.cognizant9.AuthenticationService.entity.Role;
+
 import javax.persistence.JoinColumn;
 
 
@@ -30,7 +42,7 @@ import javax.persistence.JoinColumn;
  */
 
 @Entity
-public class User {
+public class UserDetails {
 	@Id
 	private String userName;
 	/**
@@ -53,14 +65,15 @@ public class User {
 	 * @param contactNumber
 	 * @param role
 	 */
-	public User(String userName, String userFirstName, String userLastName, String userPassword, String contactNumber) {
+	public UserDetails(String userName, String userFirstName, String userLastName, String userPassword, String contactNumber,
+			Set<Role> role) {
 		super();
 		this.userName = userName;
 		this.userFirstName = userFirstName;
 		this.userLastName = userLastName;
 		this.userPassword = userPassword;
 		this.contactNumber = contactNumber;
-	
+		this.role = role;
 	}
 	private String userFirstName;
 	private String userLastName;
@@ -148,43 +161,16 @@ public class User {
 	 */
 	
 	/**
-	 * @param string5 
-	 * @param string4 
-	 * @param string3 
-	 * @param string2 
-	 * @param string 
 	 * 
 	 */
-	
+	public UserDetails() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	@Override
 	public String toString() {
 		return "User [userName=" + userName + ", userFirstName=" + userFirstName + ", userLastName=" + userLastName
 				+ ", userPassword=" + userPassword + ", contactNumber=" + contactNumber + "]";
-	}
-	/**
-	 * @param userName
-	 * @param userFirstName
-	 * @param userLastName
-	 * @param userPassword
-	 * @param contactNumber
-	 * @param role
-	 */
-	public User(String userName, String userFirstName, String userLastName, String userPassword, String contactNumber,
-			Set<Role> role) {
-		super();
-		this.userName = userName;
-		this.userFirstName = userFirstName;
-		this.userLastName = userLastName;
-		this.userPassword = userPassword;
-		this.contactNumber = contactNumber;
-		this.role = role;
-	}
-	/**
-	 * 
-	 */
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	

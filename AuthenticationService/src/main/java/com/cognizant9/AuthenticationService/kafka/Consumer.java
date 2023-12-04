@@ -3,6 +3,7 @@
  */
 package com.cognizant9.AuthenticationService.kafka;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -21,6 +22,8 @@ import org.springframework.stereotype.Service;
 
 import com.cognizant9.AuthenticationService.entity.User;
 import com.cognizant9.AuthenticationService.repository.UserRepo;
+import com.cognizant9.AuthenticationService.service.UserService;
+import com.cognizant9.UserProfileService.entity.UserDetails;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -30,40 +33,17 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class Consumer {
 	
-	 private static final String TOPIC = "user-profile-topic";
-	 
-	 
-	 Logger logger = LoggerFactory.getLogger(Consumer.class);
-	 
-	 @Autowired
-	 private UserRepo userDao;
-	 
-	 
-	 
-	 
-        
-	 
-	 
-	    @KafkaListener(topics = TOPIC, groupId = "authentication-group")
-	    public void consumeUserProfileEvent(String message) {
-	        // Process the received message from the UserProfileService
-	        System.out.println("Received message in AuthenticationService: " + message);
-	        // Perform authentication-related logic here
-	        logger.info("consumes message "+message);
-	        ObjectMapper objectMapper = new ObjectMapper();
-	        try {
-	            // Convert JSON string to List
-	            List<String> stringList = objectMapper.readValue(message, new TypeReference<List<String>>() {});
-	            // Print the resulting List
-	            System.out.println("Converted List:");
-	            for (String element : stringList) {
-	                System.out.println(element);
-	                
-	            }
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
-	    }
+	@Autowired
+	UserService userService;//for consuming data from kafka and register the user
+    private static final Logger LOGGER = LoggerFactory.getLogger(Consumer.class);
+
+    @KafkaListener(topics = "${spring.kafka.topic-json.name}", groupId = "${spring.kafka.consumer.group-id}")
+    public void consume(UserDetails user){
+        LOGGER.info(String.format("Json message recieved -> %s", user.toString()));
+        userService.registerUser(user);//user registeration using kafka
+    }
+	    
+	    
 
 }
 
