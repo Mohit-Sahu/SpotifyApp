@@ -3,6 +3,7 @@
  */
 package com.cognizant.mohit.Music_List.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 /**
  * @author mohit
  *
@@ -27,8 +28,16 @@ public class SpotifyService {
 
     @Value("${spotify.api.url}")
     private String spotifyApiUrl;
+    
+    
+    
+
+   ;
+    
+ 
 
     private final RestTemplate restTemplate;
+    
 
     // Inject the token via constructor
     public SpotifyService(RestTemplateBuilder restTemplateBuilder,
@@ -37,11 +46,22 @@ public class SpotifyService {
                 .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer " + spotifyApiToken)
                 .build();
     }
+    
+    public Object searchSpotify(String query, String type) {
+        // Spotify API endpoint
+        
+    	String apiUrl = spotifyApiUrl + "/search/";
+     
 
-    public String getTracks(String trackIds) {
-        String apiUrl = spotifyApiUrl +"/tracks/" + "?ids=" + trackIds;
-        return restTemplate.getForObject(apiUrl, String.class);
+
+        // Make the GET request to Spotify API
+        return restTemplate.getForObject(
+                String.format("%s?q=%s&type=%s", apiUrl, query, type),
+                Object.class
+        );
     }
+
+ 
     
     public AlbumDTO getAlbum(String albumId) {
     	   String apiUrl = spotifyApiUrl + "/albums/" + albumId;

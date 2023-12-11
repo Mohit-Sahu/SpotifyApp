@@ -12,6 +12,7 @@ package com.cognizant.mohit.WishList.controller;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.hc.client5.http.auth.InvalidCredentialsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,39 +23,82 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cognizant.mohit.WishList.document.WishlistItem;
-import com.cognizant.mohit.WishList.repo.WishlistRepository;
+import com.cognizant.mohit.WishList.exception.ExternalServiceException;
+import com.cognizant.mohit.WishList.fiegn.AuthClient;
 import com.cognizant.mohit.WishList.service.WishlistService;
+
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+
+
+import feign.FeignException;
+import io.swagger.v3.oas.annotations.Parameter;
 
 @RestController
-@RequestMapping("/wishlist")
+@RequestMapping("/api/v1.0/wishlist")
 public class WishListController {
 
     @Autowired
-    private WishlistService wishlistService;
+    WishlistService whishListService;
 
-    @PostMapping("/add")
-    public ResponseEntity<String> addToWishlist(@RequestBody WishlistItem wishlistItem) {
-        String response = wishlistService.addToWishlist(wishlistItem);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    @Autowired
+    AuthClient authClient;
+
+    //kafka
+    @GetMapping("/getByUserId/{userId}")
+    public ResponseEntity<?> getWhishlistByUserId(@PathVariable String userId,
+            @Parameter(hidden = true) @RequestHeader("Authorization") String token) throws InvalidCredentialsException {
+    	try {
+			Map<String, String> userInfo = (Map<String, String>) authClient.validateToken(token).getBody();
+			if (userInfo.containsValue("ROLE_ADMIN") || userInfo.containsValue("ROLE_CUSTOMER")) {
+				return new ResponseEntity<>(whishListService.getWishlist(userId), HttpStatus.OK);
+			} else {
+				throw new InvalidCredentialsException("Access Denied");
+			}
+		} catch (FeignException e) {
+			throw new ExternalServiceException(e.getMessage());
+		}
+    }
+
+    @PostMapping("/addItem")
+    public ResponseEntity<?> addStockToWhishlist(@RequestBody WishlistItem whishlist,
+            @Parameter(hidden = true) @RequestHeader("Authorization") String token) throws InvalidCredentialsException {
+    	try {
+			Map<String, String> userInfo = (Map<String, String>) authClient.validateToken(token).getBody();
+			if (userInfo.containsValue("ROLE_ADMIN") || userInfo.containsValue("ROLE_CUSTOMER")) {
+				String userId = userInfo.keySet().iterator().next();
+				System.out.println("userIdv " + userId);
+				whishlist.setUserId(userId);
+				return new ResponseEntity<>(whishListService.addToWishlist(whishlist), HttpStatus.OK);
+			} else {
+				throw new InvalidCredentialsException("Access Denied");
+			}
+		} catch (FeignException e) {
+			throw new ExternalServiceException(e.getMessage());
+		}
     }
 
     @DeleteMapping("/remove/{userId}/{trackId}")
-    public ResponseEntity<String> removeFromWishlist(@PathVariable String userId, @PathVariable String trackId) {
-        String response = wishlistService.removeFromWishlist(userId, trackId);
-        HttpStatus status = response.startsWith("Track removed") ? HttpStatus.OK : HttpStatus.NOT_FOUND;
-        return ResponseEntity.status(status).body(response);
+    public ResponseEntity<?> deleteFromWhishList(@PathVariable String userId, @PathVariable String trackId,
+            @Parameter(hidden = true) @RequestHeader("Authorization") String token) throws InvalidCredentialsException {
+    	try {
+			Map<String, String> userInfo = (Map<String, String>) authClient.validateToken(token).getBody();
+			if (userInfo.containsValue("ROLE_ADMIN") || userInfo.containsValue("ROLE_CUSTOMER")) {
+				return new ResponseEntity<>(whishListService.removeFromWishlist(userId,trackId), HttpStatus.OK);
+			} else {
+				throw new InvalidCredentialsException("Access Denied");
+			}
+		} catch (FeignException e) {
+			throw new ExternalServiceException(e.getMessage());
+		}
     }
 
-    @GetMapping("/list/{userId}")
-    public ResponseEntity<List<WishlistItem>> getWishlist(@PathVariable String userId) {
-        List<WishlistItem> wishlist = wishlistService.getWishlist(userId);
-        return ResponseEntity.ok(wishlist);
-    }
+  
+
+  
 }

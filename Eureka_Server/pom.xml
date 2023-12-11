@@ -3,11 +3,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.cognizant.2106879</groupId>
-		<artifactId>SpotifyApp</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
+<groupId>com.cognizant.2106879</groupId>
+<artifactId>SpotifyApp</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+<relativePath/> <!-- lookup parent from repository -->
+</parent>
 	<groupId>com.cognizant.mohit</groupId>
 	<artifactId>Eureka_Server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -18,13 +18,11 @@
 		<spring-cloud.version>2023.0.0-RC1</spring-cloud.version>
 	</properties>
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+			<version>4.0.3</version>
 		</dependency>
 
 		<dependency>
