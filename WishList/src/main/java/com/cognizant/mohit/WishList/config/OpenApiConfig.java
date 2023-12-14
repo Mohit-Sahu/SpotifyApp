@@ -32,7 +32,7 @@ public class OpenApiConfig {
 				.components(new Components().addSecuritySchemes("bearer-token",
 						new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")
 								.name("Authorization")))
-				.info(new Info().title("AUTHORIZATION-MICROSERVICE")
+				.info(new Info().title("WISHLIST-MICROSERVICE")
 						.description("@author:github/mohit-app auth for spotify app").version("1.0.0"))
 				.addSecurityItem(new SecurityRequirement().addList("bearer-token"));
 	}

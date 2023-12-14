@@ -11,7 +11,11 @@ import org.springframework.http.HttpStatus;
 
 public class WishlistException extends RuntimeException {
 
-    private final HttpStatus status;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private final HttpStatus status;
 
     public WishlistException(String message, HttpStatus status) {
         super(message);
