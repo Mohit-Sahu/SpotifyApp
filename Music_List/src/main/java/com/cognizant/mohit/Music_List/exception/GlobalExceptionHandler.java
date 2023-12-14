@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.cognizant.mohit.Music_List.dao.ErrorResponseDTO;
+import com.cognizant.mohit.Music_List.dto.ErrorResponseDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 

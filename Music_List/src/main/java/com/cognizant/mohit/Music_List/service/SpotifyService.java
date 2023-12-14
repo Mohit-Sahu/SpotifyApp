@@ -3,7 +3,6 @@
  */
 package com.cognizant.mohit.Music_List.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 /**
  * @author mohit
  *
@@ -11,17 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.cognizant.mohit.Music_List.dao.AlbumDTO;
-import com.cognizant.mohit.Music_List.model.Track;
+import com.cognizant.mohit.Music_List.dto.AlbumDTO;
 
-import java.util.Collections;
-import java.util.List;
+
 
 @Service
 public class SpotifyService {
@@ -29,11 +23,7 @@ public class SpotifyService {
     @Value("${spotify.api.url}")
     private String spotifyApiUrl;
     
-    
-    
 
-   ;
-    
  
 
     private final RestTemplate restTemplate;

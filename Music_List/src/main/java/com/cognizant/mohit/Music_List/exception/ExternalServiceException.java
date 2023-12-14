@@ -10,7 +10,12 @@ package com.cognizant.mohit.Music_List.exception;
 
 public class ExternalServiceException extends RuntimeException {
 
-    public ExternalServiceException(String message) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public ExternalServiceException(String message) {
         super(message);
     }
 }

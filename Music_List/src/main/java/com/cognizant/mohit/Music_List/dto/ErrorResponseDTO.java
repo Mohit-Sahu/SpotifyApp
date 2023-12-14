@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.cognizant.mohit.Music_List.dao;
+package com.cognizant.mohit.Music_List.dto;
 
 /**
  * @author mohit

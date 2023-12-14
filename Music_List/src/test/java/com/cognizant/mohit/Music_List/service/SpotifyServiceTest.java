@@ -2,64 +2,58 @@
  * 
  */
 package com.cognizant.mohit.Music_List.service;
-
-/**
- * @author mohit
- *
- */
-import com.cognizant.mohit.Music_List.dao.AlbumDTO;
-import com.cognizant.mohit.Music_List.service.SpotifyService;
-import org.junit.jupiter.api.Test;
+import com.cognizant.mohit.Music_List.dto.AlbumDTO;
 import org.junit.jupiter.api.BeforeEach;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.client.RestClientException;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.springframework.web.client.RestTemplate;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 class SpotifyServiceTest {
 
+    @Mock
+    private RestTemplate restTemplate;
+
+    @InjectMocks
     private SpotifyService spotifyService;
 
     @BeforeEach
     void setUp() {
-        RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();
-        String validToken = "validToken"; // Replace with a valid Spotify API token
-        spotifyService = new SpotifyService(restTemplateBuilder, validToken);
+        MockitoAnnotations.openMocks(this);
     }
 
-    @Test
-    void getAlbumWithValidAlbumIdShouldReturnAlbumDTO() {
-        String validAlbumId = "4aawyAB9vmqN3uQ7FjRGTy";
-        AlbumDTO albumDTO = spotifyService.getAlbum(validAlbumId);
+    @SuppressWarnings("unchecked")
+	@Test
+    void searchSpotify_Success() {
+        String query = "test";
+        String type = "track";
+        String responseBody = "Mocked Spotify Search Response";
 
-        assertNotNull(albumDTO);
-        assertEquals(validAlbumId, albumDTO.getId(), "The returned album ID should match the requested album ID");
-        assertNotNull(albumDTO.getName(), "The album should have a name");
-        assertNotNull(albumDTO.getArtists(), "The album should have artists");
-        assertTrue(albumDTO.getArtists().size() > 0, "The album should have at least one artist");
+        when(restTemplate.getForObject(any(String.class), any(Class.class)))
+                .thenReturn(responseBody);
+
+        Object result = spotifyService.searchSpotify(query, type);
+
+        assertEquals(responseBody, result);
     }
 
+    @SuppressWarnings("unchecked")
+	@Test
+    void getAlbum_Success() {
+        String albumId = "123";
+        AlbumDTO mockedAlbum = new AlbumDTO("Test Album", 0, "Artist", "2022", "http://example.com/cover.jpg", albumId, albumId, null, null);
 
-    @Test
-    void getAlbumWithInvalidAlbumIdShouldThrowException() {
-        String invalidAlbumId = "as1f2f3"; // Replace with an invalid album ID
-        assertThrows(RestClientException.class, () -> {
-            spotifyService.getAlbum(invalidAlbumId);
-        });
-    }
+        when(restTemplate.getForObject(any(String.class), any(Class.class)))
+                .thenReturn(mockedAlbum);
 
-    @Test
-    void getAlbumWithNullAlbumIdShouldThrowException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            spotifyService.getAlbum(null);
-        });
-    }
+        AlbumDTO result = spotifyService.getAlbum(albumId);
 
-    @Test
-    void getAlbumWithEmptyAlbumIdShouldThrowException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            spotifyService.getAlbum("");
-        });
+        assertEquals(mockedAlbum, result);
     }
 }

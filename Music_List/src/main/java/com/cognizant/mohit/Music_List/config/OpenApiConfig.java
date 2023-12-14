@@ -32,8 +32,8 @@ public class OpenApiConfig {
 				.components(new Components().addSecuritySchemes("bearer-token",
 						new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")
 								.name("Authorization")))
-				.info(new Info().title("AUTHORIZATION-MICROSERVICE")
-						.description("@author:github/arvindsis11 auth for stock app").version("1.0.0"))
+				.info(new Info().title("MUSIC-MICROSERVICE")
+						.description("@author:github/mohit-sahu auth for spotify app").version("1.0.0"))
 				.addSecurityItem(new SecurityRequirement().addList("bearer-token"));
 	}
 
