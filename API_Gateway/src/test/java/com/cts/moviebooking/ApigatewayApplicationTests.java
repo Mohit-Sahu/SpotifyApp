@@ -1,10 +1,10 @@
-package com.cognizant.mohit.API_Gateway;
+package com.cts.moviebooking;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApiGatewayApplicationTests {
+class ApigatewayApplicationTests {
 
 	@Test
 	void contextLoads() {
