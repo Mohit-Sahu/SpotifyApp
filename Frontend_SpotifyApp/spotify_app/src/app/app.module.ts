@@ -12,6 +12,8 @@ import { BrowseCardComponent } from './components/browse-card/browse-card.compon
 import { SongsCardComponent } from './components/songs-card/songs-card.component';
 import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FooterComponent } from './components/footer/footer.component';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     NavbarComponent,
     BrowseCardComponent,
     SongsCardComponent,
-    LoginComponent
+    LoginComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
