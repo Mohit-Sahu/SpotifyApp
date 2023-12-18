@@ -1,0 +1,69 @@
+<div>
+  <div class="logo">
+    <img src="assets/img/logo3.png" alt="" />
+    <div class="heading">
+      <h1>Sign up for free to start listening</h1>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="text-left">
+      <p class="heading mb-0">Whats your email?</p>
+      <mat-form-field class="mff-width pb-0" appearance="outline">
+        <mat-label>Email your email</mat-label>
+        <input matInput />
+      </mat-form-field>
+
+      <p class="clrgreen">Use phone number insted.</p>
+
+      <p class="heading mb-0">Create a username</p>
+      <mat-form-field class="mff-width" appearance="outline">
+        <mat-label>Enter your email again.</mat-label>
+        <input matInput />
+      </mat-form-field>
+
+      <p class="heading mb-0">Create a password</p>
+      <mat-form-field class="mff-width" appearance="outline">
+        <mat-label>Create a password.</mat-label>
+        <input matInput />
+      </mat-form-field>
+
+      <p class="heading mb-0">Confirm password</p>
+      <mat-form-field class="mff-width" appearance="outline">
+        <mat-label>Create a password.</mat-label>
+        <input matInput />
+      </mat-form-field>
+
+      <p class="heading mb-0">Your mobile number</p>
+      <mat-form-field class="mff-width" appearance="outline">
+        <mat-label>Create a password.</mat-label>
+        <input matInput />
+      </mat-form-field>
+    </div>
+
+    <div class="w">
+      <div class="chkbox">
+        <input type="checkbox" /><span>
+          Share my registration data with Spotify's content providers for
+          marketing purposes.</span
+        >
+      </div>
+
+      <div class="fsizesml mb-3">
+        By clicking on Sign up, you agree to Spotify's
+        <span class="cgrnuln"> Terms and Conditions of Use.</span>
+      </div>
+
+      <button
+        mat-flat-button
+        class="signup-btn mb-4"
+        [routerLink]="['/download']"
+      >
+        SIGN UP
+      </button>
+      <p class="heading">
+        Have an account? <span class="cgrnuln" routerLink="/login"> Log in</span>
+      </p>
+    </div>
+  </div>
+</div>

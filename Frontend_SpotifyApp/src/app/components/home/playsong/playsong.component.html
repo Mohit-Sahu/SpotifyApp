@@ -1,0 +1,58 @@
+<div class="playsong">
+    <div class="img d-flex">
+        <div>
+            <img src="https://tfipost.in/wp-content/uploads/sites/2/2022/11/cropped-Arijit_singh_concert.jpg" alt="">
+        </div>
+        <div>
+            <p class="p1">Verified Artist</p>
+            <p class="p2">Arjit Singh</p>
+            <p class="p3">Bollywood</p>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="d-flex align-items-center">
+            <button mat-mini-fab class="play-btn">
+                <mat-icon> play_arrow</mat-icon>
+            </button>
+            <button mat-flat-button class="follow-btn">FOLLOW</button>
+            <mat-icon>more_horiz</mat-icon>
+        </div>
+
+        <div class="song-list">
+            <div class="song-item heading">
+                <div class="song-details d-flex align-items-center">
+                    <div class="serial-no">#</div>
+                    <div class="play-icon">
+                        <mat-icon>play_arrow</mat-icon>
+                    </div>
+                    <div class="song-info">
+                        <p class="info-label">Title</p>
+                        <p class="info-label">Album</p>
+                        <p class="info-label">Duration</p>
+                    </div>
+                    <div class="heart-icon">Favorite</div>
+                </div>
+            </div>
+            <div class="song-item" *ngFor="let song of songs; let i = index">
+                <div class="song-details d-flex align-items-center">
+                    <div class="serial-no">{{ i + 1 }}</div>
+                    <div class="play-icon">
+                        <mat-icon>play_arrow</mat-icon>
+                    </div>
+                    <div class="song-info">
+                        <p>{{ song.title }}</p>
+                        <p>{{ song.artist }}</p>
+                        <p>{{ song.duration }}</p>
+                    </div>
+                    <div class="heart-icon">
+                        <mat-icon>favorite_border</mat-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>

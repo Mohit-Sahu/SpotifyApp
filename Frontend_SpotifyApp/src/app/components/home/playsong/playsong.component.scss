@@ -1,0 +1,136 @@
+.playsong {
+    margin-top: 50px;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://2.bp.blogspot.com/-vTTvcAJNppc/V_iAze96DUI/AAAAAAAAEf8/I1fvPW7IlhYlKbX8CmOOrRLTyWmMkFJOQCLcB/s1600/Arijit-Singh-Latest-Wallpaper.jpg') center/cover;
+
+    .img {
+        margin: 50px;
+        align-items: center;
+        padding-top: 50px;
+        gap: 20px;
+        color: white;
+
+        img {
+            border-radius: 20px;
+            height: 200px;
+            width: 200px;
+            border-radius: 100%;
+        }
+
+        .p1 {
+            font-weight: 500;
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .p2 {
+            font-size: 80px;
+            line-height: 35px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+        }
+
+        .p3 {
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            margin-top: 20px;
+        }
+    }
+
+    .content {
+        background-color: transparent;
+        padding: 20px;
+        color: white;
+
+        .song-list {
+            margin-top: 20px;
+            overflow: auto;
+        
+            .song-item {
+                width: 100%;
+                padding: 10px;
+                border-bottom: 1px solid white;
+                transition: background-color 0.3s;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+        
+                &:hover {
+                    background-color: rgba(255, 255, 255, 0.1);
+                }
+        
+                .heading {
+                    font-weight: bold;
+                }
+        
+                .song-details {
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+        
+                    .serial-no {
+                        width: 20px; /* Adjust the width as needed */
+                        margin-right: 10px;
+                    }
+        
+                    .play-icon {
+                        display: none;
+                        margin-right: 10px;
+                    }
+        
+                    .song-info {
+                        flex-grow: 1;
+                        margin-right: 10px;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        p {
+                            text-align: center;
+                        }
+                    }
+        
+                    .info-label {
+                        font-weight: bold;
+                        margin-right: 5px;
+                    }
+        
+                    &:hover {
+                        .serial-no {
+                            display: none;
+                        }
+        
+                        .play-icon {
+                            display: block;
+                        }
+                    }
+                }
+        
+                .heart-icon {
+                    display: none;
+                    margin-left: 10px;
+                }
+        
+                &:hover {
+                    .heart-icon {
+                        display: block;
+                    }
+                }
+            }
+        }
+        
+
+        .play-btn {
+            background-color: rgb(49, 192, 30);
+            margin-right: 20px;
+        }
+
+        .follow-btn {
+            background: none;
+            color: white;
+            border: 1px solid white;
+            letter-spacing: 1px;
+            margin-right: 20px;
+        }
+    }
+}
