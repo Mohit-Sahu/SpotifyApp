@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AlbumDTO } from 'src/app/_model/album-dto';
+import { MusicListService } from 'src/app/_services/music-list.service';
 
 @Component({
   selector: 'app-homesection',
@@ -9,11 +11,30 @@ export class HomesectionComponent implements OnInit {
   songs: any[]= [];;
   cards: any[] = [];
 
-  constructor() { }
+  album!: AlbumDTO;
+
+  constructor(private listService: MusicListService) {}
+
+
 
   ngOnInit(): void {
     this.array()
+    const albumId = '4aawyAB9vmqN3uQ7FjRGTy'; // Replace with the actual album ID
+
+    this.listService.getAlbumById(albumId).subscribe(
+      (data: AlbumDTO) => {
+        this.album = data;
+        console.log('Album Data:', this.album);
+      },
+      (error: any) => {
+        console.error('Error fetching album data:', error);
+      }
+    );
   }
+
+  
+
+ 
 
   
 array(){

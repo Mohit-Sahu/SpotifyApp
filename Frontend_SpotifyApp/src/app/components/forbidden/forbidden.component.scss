@@ -1,0 +1,23 @@
+.card-header{
+    margin: 50px;
+    margin-top: 200px;
+    padding: 30px;
+}
+
+.heading{
+    font-size: 60px;
+    padding: 20px;
+}
+
+.gradient-custom {
+    /* fallback for old browsers */
+    
+   
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to bottom right, rgb(31, 14, 32), rgb(52, 125, 173));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to bottom right, rgb(39, 9, 39), rgb(1, 13, 34))
+    }
+
+    

@@ -9,6 +9,8 @@ import { IndexComponent } from './components/index/index.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { LikedSongsComponent } from './components/liked-songs/liked-songs.component';
+import { ForbiddenComponent } from './components/forbidden/forbidden.component';
+import { ErrorComponent } from './components/error/error.component';
 
 const routes: Routes = [
   {
@@ -36,6 +38,14 @@ const routes: Routes = [
   {
     path: 'download',
     component: DownloadComponent,
+  },
+  {
+    path: 'forbidden',
+    component: ForbiddenComponent,
+  },
+  {
+    path: 'error',
+    component: ErrorComponent,
   },
   {
     path: 'home',

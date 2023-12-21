@@ -10,7 +10,7 @@ import { UserAuthService } from './user-auth.service';
 })
 export class UserService {
 
-  _baseUrl="/api/v1.0/authentication";
+  _baseUrl="http://localhost:8082/api/v1.0";
 
   requestHeader = new HttpHeaders({
     'NoAuth': "True"
@@ -19,16 +19,16 @@ export class UserService {
   constructor(private httpClient: HttpClient,private userAuthService: UserAuthService) { }
 
   public login(loginData:any){
-    return this.httpClient.post(this._baseUrl+"/login",loginData,{headers : this.requestHeader});
+    return this.httpClient.post(this._baseUrl+"/authentication"+"/login",loginData,{headers : this.requestHeader});
   }
 
   public registerNewUser(user:User){
-    return this.httpClient.post(this._baseUrl+"/registerNewUser",user);
+    return this.httpClient.post(this._baseUrl+"/userProfile/register",user);
 
   }
 
   addUser(user:User):Observable<User>{
-    return this.httpClient.post<User>(this._baseUrl+'/registerNewUser',user);
+    return this.httpClient.post<User>(this._baseUrl+'/userProfile/register',user);
   }
 
 

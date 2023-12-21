@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UserAuthService } from 'src/app/_services/user-auth.service';
+import { UserService } from 'src/app/_services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -7,9 +10,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SigninComponent implements OnInit {
 
-  constructor() { }
+constructor(public userservice:UserService, private userAuthService: UserAuthService,private router:Router) { }
 
   ngOnInit(): void {
+  }
+
+  loginData = {
+    username: '',
+    password: '',
+  };
+
+  login() {
+    console.log(this.loginData);
+    this.userservice.login(this.loginData).subscribe(
+      (response: any) => {
+        console.log(response);
+        if (Array.isArray(response.roles) && response.roles.length > 0) {
+        this.userAuthService.setRoles(response.roles[0].name);
+        this.userAuthService.setToken(response.accessToken);
+
+        const role = response.roles[0].name;
+        console.log(role);
+        if (role === 'ROLE_CUSTOMER') {
+          this.router.navigate(['/home/songs']);
+        } else {
+          this.router.navigate(['/']);
+        }
+      }},
+      (error) => {
+        console.log(error);
+      }
+    );
+
+  
   }
 
 }

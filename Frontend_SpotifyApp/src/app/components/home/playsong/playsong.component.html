@@ -34,19 +34,19 @@
                     <div class="heart-icon">Favorite</div>
                 </div>
             </div>
-            <div class="song-item" *ngFor="let song of songs; let i = index">
+            <div class="song-item" *ngFor="let song of album.tracks.items; let i = index">
                 <div class="song-details d-flex align-items-center">
                     <div class="serial-no">{{ i + 1 }}</div>
                     <div class="play-icon">
                         <mat-icon>play_arrow</mat-icon>
                     </div>
                     <div class="song-info">
-                        <p>{{ song.title }}</p>
-                        <p>{{ song.artist }}</p>
-                        <p>{{ song.duration }}</p>
+                        <p>{{ song.name }}</p>
+                        <p>Pitbull</p>
+                        <p>{{ song.duration_ms }}</p>
                     </div>
                     <div class="heart-icon">
-                        <mat-icon>favorite_border</mat-icon>
+                        <mat-icon (click)="addToWishlist(song)">favorite_border</mat-icon>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +23,9 @@ import { PlaysongComponent } from './components/home/playsong/playsong.component
 import { MaterialModule } from './material/material.module';
 import { LikedSongsComponent } from './components/liked-songs/liked-songs.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ForbiddenComponent } from './components/forbidden/forbidden.component';
+import { ErrorComponent } from './components/error/error.component';
+
 
 @NgModule({
   declarations: [
@@ -41,16 +45,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HomesectionComponent,
     ViewallComponent,
     PlaysongComponent,
-    LikedSongsComponent
+    LikedSongsComponent,
+    ForbiddenComponent,
+    ErrorComponent
   ],
   imports: [
- 
+
+
   BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

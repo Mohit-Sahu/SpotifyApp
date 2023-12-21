@@ -1,69 +1,92 @@
 <div>
-  <div class="logo">
-    <img src="assets/img/logo3.png" alt="" />
-    <div class="heading">
-      <h1>Sign up for free to start listening</h1>
+    <div class="logo">
+      <img src="assets/img/logo3.png" alt="" />
+      <div class="heading">
+        <h1>Sign up for free to start listening</h1>
+      </div>
+    </div>
+  
+    <div class="container">
+      <form [formGroup]="userForm" *ngIf="!proceedClicked; else signupForm">
+        <!-- First Part of the Form -->
+        <p class="heading mb-0">What's your email?</p>
+        <mat-form-field class="mff-width pb-0" appearance="outline">
+          <mat-label>Email your email</mat-label>
+          <input matInput formControlName="email" />
+          <mat-error *ngIf="userForm.get('email')?.hasError('required')">Email is required</mat-error>
+          <mat-error *ngIf="userForm.get('email')?.hasError('email')">Invalid email format</mat-error>
+        </mat-form-field>
+  
+        <p class="heading mb-0">Create a username</p>
+        <mat-form-field class="mff-width" appearance="outline">
+          <mat-label>Enter your username</mat-label>
+          <input matInput formControlName="username" />
+          <mat-error *ngIf="userForm.get('username')?.hasError('required')">Username is required</mat-error>
+        </mat-form-field>
+  
+        <p class="heading mb-0">Enter your first name</p>
+        <mat-form-field class="mff-width" appearance="outline">
+          <mat-label>Enter your firstname</mat-label>
+          <input matInput formControlName="firstName" />
+          <mat-error *ngIf="userForm.get('firstName')?.hasError('required')">First name is required</mat-error>
+        </mat-form-field>
+  
+        <p class="heading mb-0">Enter your lastname</p>
+        <mat-form-field class="mff-width" appearance="outline">
+          <mat-label>Enter your lastname</mat-label>
+          <input matInput formControlName="lastName" />
+          <mat-error *ngIf="userForm.get('lastName')?.hasError('required')">Last name is required</mat-error>
+        </mat-form-field>
+  
+        <p class="clrgreen">Use phone number instead.</p>
+  
+        <button mat-flat-button class="signup-btn mb-4" (click)="proceed()">PROCEED</button>
+      </form>
+  
+      <ng-template #signupForm>
+        <form [formGroup]="userForm" (ngSubmit)="signUp()">
+          <!-- Second Part of the Form -->
+          <p class="heading mb-0">Create a password</p>
+          <mat-form-field class="mff-width" appearance="outline">
+            <mat-label>Create a password.</mat-label>
+            <input matInput formControlName="password" type="password" />
+            <mat-error *ngIf="userForm?.hasError('passwordMismatch') && !userForm?.get('password')?.valid">
+              Passwords do not match
+            </mat-error>
+          </mat-form-field>
+  
+          <p class="heading mb-0">Confirm password</p>
+          <mat-form-field class="mff-width" appearance="outline">
+            <mat-label>Confirm password</mat-label>
+            <input matInput formControlName="confirmPassword" type="password" />
+            <mat-error *ngIf="userForm.get('confirmPassword')?.hasError('required')">Confirm password is required</mat-error>
+            <mat-error *ngIf="userForm?.hasError('passwordMismatch')&& !userForm?.get('confirmPassword')?.valid">Passwords do not match</mat-error>
+          </mat-form-field>
+  
+          <p class="heading mb-0">Your mobile number</p>
+          <mat-form-field class="mff-width" appearance="outline">
+            <mat-label>Enter mobile number</mat-label>
+            <input matInput formControlName="number" />
+            <mat-error *ngIf="userForm.get('number')?.hasError('pattern')">Invalid mobile number</mat-error>
+          </mat-form-field>
+  
+          <div class="w">
+            <div class="chkbox">
+              <mat-checkbox formControlName="shareData">Share my registration data with Spotify's content providers for marketing purposes.</mat-checkbox>
+            </div>
+  
+            <div class="fsizesml mb-3">
+              By clicking on Sign up, you agree to Spotify's
+              <span class="cgrnuln"> Terms and Conditions of Use.</span>
+            </div>
+  
+            <button mat-flat-button class="signup-btn mb-4" type="submit">SIGN UP</button>
+            <p class="heading">
+              Have an account? <span class="cgrnuln" routerLink="/login"> Log in</span>
+            </p>
+          </div>
+        </form>
+      </ng-template>
     </div>
   </div>
-
-  <div class="container">
-    <div class="text-left">
-      <p class="heading mb-0">Whats your email?</p>
-      <mat-form-field class="mff-width pb-0" appearance="outline">
-        <mat-label>Email your email</mat-label>
-        <input matInput />
-      </mat-form-field>
-
-      <p class="clrgreen">Use phone number insted.</p>
-
-      <p class="heading mb-0">Create a username</p>
-      <mat-form-field class="mff-width" appearance="outline">
-        <mat-label>Enter your email again.</mat-label>
-        <input matInput />
-      </mat-form-field>
-
-      <p class="heading mb-0">Create a password</p>
-      <mat-form-field class="mff-width" appearance="outline">
-        <mat-label>Create a password.</mat-label>
-        <input matInput />
-      </mat-form-field>
-
-      <p class="heading mb-0">Confirm password</p>
-      <mat-form-field class="mff-width" appearance="outline">
-        <mat-label>Create a password.</mat-label>
-        <input matInput />
-      </mat-form-field>
-
-      <p class="heading mb-0">Your mobile number</p>
-      <mat-form-field class="mff-width" appearance="outline">
-        <mat-label>Create a password.</mat-label>
-        <input matInput />
-      </mat-form-field>
-    </div>
-
-    <div class="w">
-      <div class="chkbox">
-        <input type="checkbox" /><span>
-          Share my registration data with Spotify's content providers for
-          marketing purposes.</span
-        >
-      </div>
-
-      <div class="fsizesml mb-3">
-        By clicking on Sign up, you agree to Spotify's
-        <span class="cgrnuln"> Terms and Conditions of Use.</span>
-      </div>
-
-      <button
-        mat-flat-button
-        class="signup-btn mb-4"
-        [routerLink]="['/download']"
-      >
-        SIGN UP
-      </button>
-      <p class="heading">
-        Have an account? <span class="cgrnuln" routerLink="/login"> Log in</span>
-      </p>
-    </div>
-  </div>
-</div>
+  

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WishlistService } from 'src/app/_services/wishlist.service';
 
 @Component({
   selector: 'app-liked-songs',
@@ -7,11 +8,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LikedSongsComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
   songs = [
     { title: 'Song 1', artist: 'Album 1', duration: '3:45' },
     { title: 'Song 2', artist: 'Album 2', duration: '4:20' },
@@ -19,4 +15,30 @@ export class LikedSongsComponent implements OnInit {
     // Add more songs as needed
   ];
 
+  wishlist!: any[];
+
+  constructor(private wishlistService: WishlistService) {
+    // Subscribe to the wishlist observable
+    this.wishlistService.getWishlist('mohit').subscribe(wishlist => {
+      this.wishlist = wishlist;
+      console.log(this.wishlist);
+    });
+  }
+
+  ngOnInit(): void {
+  }
+
+  removeFromWishlist(track: any) {
+    this.wishlistService.removeFromWishlist(track).subscribe(() => {
+      // Update the local wishlist after successful removal
+      this.updateWishlist();
+    });
+  }
+  
+  private updateWishlist() {
+    // Fetch the latest wishlist from the service
+    this.wishlistService.getWishlist('mohit').subscribe(wishlist => {
+      this.wishlist = wishlist;
+    });
+  }
 }

@@ -6,7 +6,7 @@
         <div>
             <p class="p1">Your Playlist</p>
             <p class="p2">Liked Songs</p>
-            <p class="p3">UserName,song count</p>
+            <p class="p3">Username, {{ wishlist.length }} songs</p>
         </div>
     </div>
 
@@ -34,16 +34,16 @@
                    
                 </div>
             </div>
-            <div class="song-item" *ngFor="let song of songs; let i = index">
+            <div class="song-item" *ngFor="let song of wishlist; let i = index">
                 <div class="song-details d-flex align-items-center">
                     <div class="serial-no">{{ i + 1 }}</div>
                     <div class="play-icon">
                         <mat-icon>play_arrow</mat-icon>
                     </div>
                     <div class="song-info">
-                        <p>{{ song.title }}</p>
-                        <p>{{ song.artist }}</p>
-                        <p>{{ song.duration }}</p>
+                        <p>{{ song.name }}</p>
+                        <p>Arjit Singh</p>
+                        <p>{{ song.duration_ms }}</p>
                     </div>
                     <div class="heart-icon">
                         <mat-icon>favorite_border</mat-icon>
