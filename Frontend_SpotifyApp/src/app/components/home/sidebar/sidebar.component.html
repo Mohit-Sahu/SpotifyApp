@@ -1,0 +1,26 @@
+<div class="mobile-menu-icon" (click)="toggleMobileMenu()">
+    <mat-icon>menu</mat-icon>
+  </div>
+  
+  <div class=" left" [ngClass]="{'active': isMobileMenuOpen}">
+    <div class="left-options" routerLink="/home/songs">
+      <mat-icon>home</mat-icon> <span>Home</span>
+    </div>
+    <div class="left-options">
+      <mat-icon>search</mat-icon>
+      <input matInput placeholder="Search" [(ngModel)]="searchQuery" (keyup.enter)="search()" class="search-input">
+    </div>
+    <div class="left-options" routerLink="/home/liked">
+      <mat-icon>video_library</mat-icon><span>Your Library</span>
+    </div>
+    <p class="mt-4">PLAYLISTS</p>
+    <div class="left-options" routerLink="/home/liked">
+      <mat-icon>add_box</mat-icon> <span>Create Playlist</span>
+    </div>
+    <div class="left-options" routerLink="/home/liked">
+      <mat-icon>favorite</mat-icon> <span>Liked Songs</span>
+    </div>
+  </div>
+  
+  <!-- Rest of your HTML content -->
+  

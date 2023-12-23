@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { WishlistService } from 'src/app/_services/wishlist.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-liked-songs',
@@ -8,37 +9,49 @@ import { WishlistService } from 'src/app/_services/wishlist.service';
 })
 export class LikedSongsComponent implements OnInit {
 
-  songs = [
-    { title: 'Song 1', artist: 'Album 1', duration: '3:45' },
-    { title: 'Song 2', artist: 'Album 2', duration: '4:20' },
-    { title: 'Song 3', artist: 'Album 3', duration: '5:10' },
-    // Add more songs as needed
-  ];
-
   wishlist!: any[];
+  username!:any[];
 
-  constructor(private wishlistService: WishlistService) {
-    // Subscribe to the wishlist observable
-    this.wishlistService.getWishlist('mohit').subscribe(wishlist => {
+  constructor(private wishlistService: WishlistService,private changeDetectorRef: ChangeDetectorRef) {
+  const userId = "mohit"; // Replace with the actual userId
+  this.wishlistService.getWishlist(userId).subscribe(
+    (wishlist: any[]) => {
       this.wishlist = wishlist;
-      console.log(this.wishlist);
-    });
+      console.log('Wishlist retrieved:', wishlist);
+      this.username=wishlist;
+    },
+    (error) => {
+      console.error('Error retrieving wishlist:', error);
+    }
+  );
   }
 
   ngOnInit(): void {
   }
 
+
+
+
   removeFromWishlist(track: any) {
-    this.wishlistService.removeFromWishlist(track).subscribe(() => {
-      // Update the local wishlist after successful removal
-      this.updateWishlist();
-    });
+    this.wishlistService.removeFromWishlist(track).subscribe(
+      (response) => {
+        // Log the success response
+        console.log('Remove from wishlist successful:', response);
+        // Update the local wishlist after successful removal
+        this.changeDetectorRef.detectChanges();
+        Swal.fire("Removed from wishlist");
+      },
+      (error) => {
+        // Log the error response
+        console.error('Error during removal from wishlist:', error);
+      }
+    );
   }
-  
-  private updateWishlist() {
-    // Fetch the latest wishlist from the service
-    this.wishlistService.getWishlist('mohit').subscribe(wishlist => {
-      this.wishlist = wishlist;
-    });
+
+  convertToMinutes(ms: number): string {
+    const minutes = Math.floor(ms / 60000);
+    const seconds = ((ms % 60000) / 1000).toFixed(0);
+    return `${minutes}:${(+seconds < 10 ? '0' : '')}${seconds}`;
   }
+
 }

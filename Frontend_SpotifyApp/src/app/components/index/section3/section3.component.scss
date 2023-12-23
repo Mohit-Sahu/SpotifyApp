@@ -1,16 +1,26 @@
-.sectn3{
+.sectn3 {
     background: linear-gradient(to bottom, #f037a6 0%, #6c0ee0 100%);
-    height: 500px;   
+    height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-        
-    h1{
+
+    h1 {
         color: white;
         font-weight: bold;
-        font-size: 50px; 
-        
+        font-size: 50px;
     }
 
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 40px; /* Adjust font size for smaller screens */
+        }
+    }
+
+    @media (max-width: 576px) {
+        h1 {
+            font-size: 30px; /* Further adjust font size for even smaller screens */
+        }
+    }
 }

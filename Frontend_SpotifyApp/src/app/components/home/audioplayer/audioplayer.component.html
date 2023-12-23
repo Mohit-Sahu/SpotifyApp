@@ -1,0 +1,33 @@
+<div class="container-fluid bottom">
+    <div class="row">
+      <div class="col-md-4 d-none d-md-block">
+        <!-- This column will be hidden on small screens -->
+        <div class="d-flex align-items-center gap">
+          <div>
+            <img src="assets/img/song1.png" alt="" class="img-fluid">
+          </div>
+          <div>
+            <p class="p1">{{ currentSong.title }}</p>
+            <p class="p2">{{ currentSong.artist }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 aud">
+        <!-- This column will take full width on small screens -->
+        <div class="d-flex align-items-center justify-content-between">
+          <audio controls #audioPlayer class="flex-grow-1">
+            <source [src]="currentSong.audioSrc" type="audio/mpeg">
+          </audio>
+          <div class="controls">
+            <button mat-icon-button (click)="playPrevious()">
+              <mat-icon>skip_previous</mat-icon>
+            </button>
+            <button mat-icon-button (click)="playNext()">
+              <mat-icon>skip_next</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

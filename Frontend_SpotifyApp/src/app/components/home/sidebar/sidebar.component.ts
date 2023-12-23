@@ -1,14 +1,15 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AlbumDTO } from 'src/app/_model/album-dto';
 import { MusicListService } from 'src/app/_services/music-list.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class SidebarComponent implements OnInit {
+
   albums: AlbumDTO[]=[];
   searchQuery: string = '';
 
@@ -46,6 +47,12 @@ export class HomeComponent implements OnInit {
     }
   }
 
+
+  isMobileMenuOpen = false;
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
 
   
   }

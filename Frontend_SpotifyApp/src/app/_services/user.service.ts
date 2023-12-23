@@ -10,6 +10,7 @@ import { UserAuthService } from './user-auth.service';
 })
 export class UserService {
 
+  _baseUrlsignup="http://localhost:8081/api/v1.0";
   _baseUrl="http://localhost:8082/api/v1.0";
 
   requestHeader = new HttpHeaders({
@@ -23,17 +24,15 @@ export class UserService {
   }
 
   public registerNewUser(user:User){
-    return this.httpClient.post(this._baseUrl+"/userProfile/register",user);
+    return this.httpClient.post(this._baseUrlsignup+"/userProfile/register",user);
 
   }
 
-  addUser(user:User):Observable<User>{
-    return this.httpClient.post<User>(this._baseUrl+'/userProfile/register',user);
-  }
+
 
 
   public forUser() {
-    return this.httpClient.get(this._baseUrl + '/forUser', {
+    return this.httpClient.get(this._baseUrlsignup + '/forUser', {
       responseType: 'text',
     });
   }
@@ -50,20 +49,20 @@ export class UserService {
   // }
 
   public roleMatch(allowedRoles : any): boolean {
+    console.log(allowedRoles);
     let isMatch = false;
     const userRoles: any = this.userAuthService.getRoles();
-
+    console.log(userRoles)
     if (userRoles != null && userRoles) {
-      for (let i = 0; i < userRoles.length; i++) {
         for (let j = 0; j < allowedRoles.length; j++) {
-          if (userRoles[i].roleName === allowedRoles[j]) {
+          if (userRoles === allowedRoles[j]) {
             isMatch = true;
             return isMatch;
           } else {
             return isMatch;
           }
         }
-      }
+      
     }
     return isMatch;
   }

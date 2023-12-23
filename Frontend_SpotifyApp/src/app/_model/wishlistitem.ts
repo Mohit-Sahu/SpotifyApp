@@ -1,8 +1,15 @@
+import { ArtistDTO } from "./artist-dto";
+
 export interface Wishlistitem {
    
-        favoriteId: string;
+        favoriteId?: string;
         userId: string;
         trackId: string;
-        dateAdded: Date;
-      
+        dateAdded?: Date;
+         name:string;
+    
+         href:string;
+        
+         duration_ms:number;
+         artists?: ArtistDTO[];
 }

@@ -1,19 +1,18 @@
-<div class="songs">
-    <div class="songs-cat mb-4" *ngFor="let song of songs">
-        <h2 class="mb-1">{{song.heading}}</h2>
-        <div class="d-flex justify-content-between">
-            <p>{{song.subheader}}</p>
-            <span class="span" [routerLink]="['/view']">SEE ALL</span>
+<div class="container mt-5">
+  <div class="row songs">
+    <div class="card-container d-flex flex-wrap gap-4">
+      <div class="card col-md-3" *ngFor="let album of albums">
+        <img
+          class="card-img-top img-fluid"
+          [src]="album.images && album.images.length > 0 ? album.images[0].url : 'path_to_placeholder_image'"
+          alt="Card image cap"
+          (click)="navigateToPlaysong(album.id)"
+        />
+        <div class="card-body">
+          <h3 class="card-title">{{ album.name }}</h3>
+          <p class="card-text">{{ album.album_type }}</p>
         </div>
-        
-        <div class="d-flex c-cart">
-        <div class="card" *ngFor="let card of cards">
-            <img class="card-img-top" [src]="card.img" alt="Card image cap">
-            <div class="card-body">
-                <h3 class="card-title">{{card.songtitle}}</h3>
-                <p class="card-text">{{card.bandname}}</p>
-            </div>
-        </div>
+      </div>
     </div>
-    </div>
+  </div>
 </div>

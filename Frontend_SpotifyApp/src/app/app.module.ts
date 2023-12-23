@@ -18,13 +18,16 @@ import { Section5Component } from './components/index/section5/section5.componen
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DownloadComponent } from './components/download/download.component';
 import { HomesectionComponent } from './components/home/homesection/homesection.component';
-import { ViewallComponent } from './components/home/viewall/viewall.component';
 import { PlaysongComponent } from './components/home/playsong/playsong.component';
 import { MaterialModule } from './material/material.module';
 import { LikedSongsComponent } from './components/liked-songs/liked-songs.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import { ErrorComponent } from './components/error/error.component';
+import { RouterModule } from '@angular/router';
+import { AudioplayerComponent } from './components/home/audioplayer/audioplayer.component';
+import { SidebarComponent } from './components/home/sidebar/sidebar.component';
+import { MsToMinutesPipe } from './components/home/playsong/playsong.component'; 
 
 
 @NgModule({
@@ -43,15 +46,15 @@ import { ErrorComponent } from './components/error/error.component';
     Section5Component,
     DownloadComponent,
     HomesectionComponent,
-    ViewallComponent,
     PlaysongComponent,
     LikedSongsComponent,
     ForbiddenComponent,
-    ErrorComponent
+    ErrorComponent,
+    AudioplayerComponent,
+    SidebarComponent,
+    MsToMinutesPipe
   ],
   imports: [
-
-
   BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -59,6 +62,8 @@ import { ErrorComponent } from './components/error/error.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    RouterModule,
+    
 
   ],
   providers: [],

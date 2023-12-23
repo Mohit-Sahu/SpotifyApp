@@ -1,58 +1,64 @@
 <div class="playsong">
     <div class="img d-flex">
-        <div>
-            <img src="https://tfipost.in/wp-content/uploads/sites/2/2022/11/cropped-Arijit_singh_concert.jpg" alt="">
-        </div>
-        <div>
-            <p class="p1">Verified Artist</p>
-            <p class="p2">Arjit Singh</p>
-            <p class="p3">Bollywood</p>
-        </div>
+      <div>
+        <img [src]="album.images[0].url" alt="">
+      </div>
+      <div>
+        <p class="p1">Albums</p>
+        <p class="p2">{{ album.name }}</p>
+        <p class="p3">{{ album.album_type }}</p>
+      </div>
     </div>
-
+  
     <div class="content">
-        <div class="d-flex align-items-center">
-            <button mat-mini-fab class="play-btn">
-                <mat-icon> play_arrow</mat-icon>
-            </button>
-            <button mat-flat-button class="follow-btn">FOLLOW</button>
-            <mat-icon>more_horiz</mat-icon>
-        </div>
-
-        <div class="song-list">
-            <div class="song-item heading">
-                <div class="song-details d-flex align-items-center">
-                    <div class="serial-no">#</div>
-                    <div class="play-icon">
-                        <mat-icon>play_arrow</mat-icon>
-                    </div>
-                    <div class="song-info">
-                        <p class="info-label">Title</p>
-                        <p class="info-label">Album</p>
-                        <p class="info-label">Duration</p>
-                    </div>
-                    <div class="heart-icon">Favorite</div>
-                </div>
+      <div class="d-flex align-items-center">
+        <button mat-mini-fab class="play-btn" (mouseenter)="isHovered = true" (mouseleave)="isHovered = false">
+          <mat-icon *ngIf="isHovered">play_arrow</mat-icon>
+        </button>
+        <button mat-flat-button class="follow-btn">FOLLOW</button>
+        <mat-icon>more_horiz</mat-icon>
+      </div>
+      <div class="song-list">
+        <div class="song-item heading">
+          <div class="song-details d-flex align-items-center">
+            <div class="serial-no">#</div>
+            <div class="play-icon">
+              <mat-icon>play_arrow</mat-icon>
             </div>
-            <div class="song-item" *ngFor="let song of album.tracks.items; let i = index">
-                <div class="song-details d-flex align-items-center">
-                    <div class="serial-no">{{ i + 1 }}</div>
-                    <div class="play-icon">
-                        <mat-icon>play_arrow</mat-icon>
-                    </div>
-                    <div class="song-info">
-                        <p>{{ song.name }}</p>
-                        <p>Pitbull</p>
-                        <p>{{ song.duration_ms }}</p>
-                    </div>
-                    <div class="heart-icon">
-                        <mat-icon (click)="addToWishlist(song)">favorite_border</mat-icon>
-                    </div>
-                </div>
+            <div class="song-info">
+              <p class="info-label" *ngIf="!isSmallScreen">Title</p>
+              <p class="info-label" *ngIf="!isSmallScreen">Artist</p>
+              <p class="info-label" *ngIf="!isSmallScreen">Duration</p>
             </div>
+            <div class="options-btn-container">
+              <mat-icon class="options-btn" *ngIf="!isSmallScreen">more_vert</mat-icon>
+            </div>
+          </div>
         </div>
-        
-        
-        
+        <div class="song-item" *ngFor="let song of album.tracks.items; let i = index">
+          <div class="song-details d-flex align-items-center">
+            <div class="play-icon" *ngIf="isSmallScreen">
+              <mat-icon (click)="playSong(album.images[0].url, song)">play_arrow</mat-icon>
+            </div>
+            <div class="song-info">
+              <p>{{ i + 1 }}</p>
+              <p>{{ song.name }}</p>
+              <p *ngIf="!isSmallScreen">{{ song.artists[0].name }}</p>
+              <p *ngIf="!isSmallScreen">{{ song.duration_ms | msToMinutes }}</p>
+            </div>
+            <div class="options-btn-container">
+              <mat-icon class="options-btn" (click)="showOptions(song)" *ngIf="!isSmallScreen">more_vert</mat-icon>
+              <mat-icon class="heart-icon" (click)="addToWishlist(song)" *ngIf="!isSmallScreen">favorite</mat-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="d-flex align-items-center options-btn-container" *ngIf="isSmallScreen">
+        <button mat-mini-fab class="play-btn">
+          <mat-icon>play_arrow</mat-icon>
+        </button>
+        <button mat-flat-button class="follow-btn">FOLLOW</button>
+      </div>
     </div>
-</div>
+  </div>

@@ -3,6 +3,8 @@ import { User, UserFormValidation } from 'src/app/_model/user';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from 'src/app/_services/user.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-signup',
@@ -29,19 +31,21 @@ export class SignupComponent implements OnInit {
     securityAnswer: 'Blue'
   };
 
-  constructor(private fb: FormBuilder,private userService:UserService) {
+  constructor(private fb: FormBuilder, private userService: UserService,private routes:Router) {
     this.userForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      username: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmpassword: ['', [Validators.required, Validators.minLength(6)]],
-      number: ['', [Validators.pattern('[0-9]*'),Validators.minLength(10)]],
+      email: [this.defaultUser.email, [Validators.required, Validators.email]],
+      username: [this.defaultUser.username, Validators.required],
+      firstName: [this.defaultUser.firstName, Validators.required],
+      lastName: [this.defaultUser.lastName, Validators.required],
+      password: [this.defaultUser.password, [Validators.required, Validators.minLength(6)]],
+      confirmpassword: [this.defaultUser.confirmpassword, [Validators.required, Validators.minLength(6)]],
+      number: [this.defaultUser.number, [Validators.required,Validators.pattern('[0-9]*'), Validators.minLength(10)]],
+      dateOfBirth: [this.defaultUser.dateOfBirth || '', Validators.required],
+      roles: [this.defaultUser.roles || '', Validators.required],
+      securityQuestion: [this.defaultUser.securityQuestion || '', Validators.required],
+      securityAnswer: [this.defaultUser.securityAnswer || '', Validators.required],
       shareData: [false]
     }, { validators: this.passwordMatchValidator });
-
-    this.userForm.patchValue(this.defaultUser);
   }
 
   ngOnInit(): void {}
@@ -53,12 +57,14 @@ export class SignupComponent implements OnInit {
   signUp() {
     // Implement your signup logic here
     console.log(this.userForm.value);
-    if (this.userForm.valid) {
+    if (this.userForm.value) {
       // Call the service to send the data
       this.userService.registerNewUser(this.userForm.value).subscribe(
         (response: any) => {
           // Handle success response if needed
           console.log('User registered successfully', response);
+          Swal.fire('Registered Successfully!');
+           this.routes.navigate(['/login']);
         },
         (error: any) => {
           // Handle error response if needed
@@ -69,12 +75,11 @@ export class SignupComponent implements OnInit {
       // Form is invalid, handle accordingly (e.g., display error messages)
       console.error('Form is invalid. Cannot submit.');
     }
-  
   }
 
   passwordMatchValidator(group: FormGroup): { [s: string]: boolean } | null {
     const password = group.get('password')?.value;
-    const confirmPassword = group.get('confirmPassword')?.value;
+    const confirmPassword = group.get('confirmpassword')?.value;
   
     if (password && confirmPassword) {
       return password === confirmPassword ? null : { passwordMismatch: true };
@@ -82,5 +87,4 @@ export class SignupComponent implements OnInit {
   
     return null;
   }
-  
 }

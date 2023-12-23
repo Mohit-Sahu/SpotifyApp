@@ -1,40 +1,50 @@
-.songs{
-    color: white;
-    margin-top: 60px;
-    .c-cart{
-        gap: 20px;
-        .card{
-            width: 220px;
-            background-color: rgb(36, 34, 34);
-            .card-img-top{
-                height: 210px;
-                width: 210px;
-                padding: 15px;
-                border-radius: 30px;
-                align-self: center;
-            }
-            .card-body{
-                padding-left: 15px;
-                padding-bottom: 15px;
-                padding-top: 0px;
-                h3{
-                    white-space: nowrap; 
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    margin-bottom: 0px;
-                }
-                p{
-                    color: rgb(161, 155, 155);
-                }
-            }
-        }
-    }
-    
+.songs {
+  color: white;
+  margin-top: 60px;
 }
 
-.span{
-    cursor: pointer;
-    &:hover{
-        text-decoration: underline;
-    }
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-around;
+}
+
+.card {
+  flex: 0 1 calc(20% - 20px); /* Initially show 5 cards */
+  max-width: 300px; /* Maximum width of each card */
+  background-color: rgb(36, 34, 34);
+  margin-bottom: 20px;
+}
+
+.card-img-top {
+  height: 210px;
+  width: 100%;
+  padding: 15px; /* Add padding for a framed appearance */
+  border-radius: 30px;
+  cursor: pointer;
+  object-fit: cover; /* Ensure the image covers the container */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+}
+
+.card-body {
+  padding: 15px;
+}
+
+h3 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 0px;
+}
+
+p {
+  color: rgb(161, 155, 155);
+}
+
+.span {
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
 }

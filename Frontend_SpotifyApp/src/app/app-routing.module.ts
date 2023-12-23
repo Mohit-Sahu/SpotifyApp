@@ -4,13 +4,13 @@ import { DownloadComponent } from './components/download/download.component';
 import { HomeComponent } from './components/home/home.component';
 import { HomesectionComponent } from './components/home/homesection/homesection.component';
 import { PlaysongComponent } from './components/home/playsong/playsong.component';
-import { ViewallComponent } from './components/home/viewall/viewall.component';
 import { IndexComponent } from './components/index/index.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { LikedSongsComponent } from './components/liked-songs/liked-songs.component';
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import { ErrorComponent } from './components/error/error.component';
+import { AuthGuard } from './security/auth.guard';  // Update this import with the correct path
 
 const routes: Routes = [
   {
@@ -33,11 +33,24 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+    data: { roles: ['ROLE_CUSTOMER'] } ,
+    canActivate: [AuthGuard],  // Secure the entire /home route
+    children: [
+      {
+        path: 'songs',
+        component: HomesectionComponent,
+      },
+      { path: 'play/:albumId', component: PlaysongComponent },
+      {
+        path: 'liked',
+        component: LikedSongsComponent,
+      },
+    ],
   },
-
   {
     path: 'download',
     component: DownloadComponent,
+    canActivate: [AuthGuard],  // Secure the /download route
   },
   {
     path: 'forbidden',
@@ -46,28 +59,6 @@ const routes: Routes = [
   {
     path: 'error',
     component: ErrorComponent,
-  },
-  {
-    path: 'home',
-    component: HomeComponent,
-    children: [
-      {
-        path: 'songs',
-        component: HomesectionComponent,
-      },
-      {
-        path: 'view',
-        component: ViewallComponent,
-      },
-      {
-        path: 'play',
-        component: PlaysongComponent,
-      },
-      {
-        path: 'liked',
-        component: LikedSongsComponent,
-      },
-    ],
   },
 ];
 

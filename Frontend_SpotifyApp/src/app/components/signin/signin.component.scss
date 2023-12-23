@@ -10,7 +10,12 @@
     color: rgb(214, 214, 214);
     border: solid 1px white;
     border-radius: 2%;
-    height: 60px;
+    height: 55px;
+}
+.gray.ng-touched {
+    /* Add styles you want to apply when the input is touched */
+    /* Example: */
+    border-color: #16181c; /* Change border color when touched */
 }
 
 .mff-width {
@@ -21,9 +26,13 @@
     width: fit-content;
     padding: 20px 50px;
     text-align: center;
-
+    background-color: #16181c;
     .heading {
         font-weight: bold;
+    }
+    .heading-login {
+        font-weight: bold;
+        font-size: 40px;
     }
 
     .btn {
@@ -41,24 +50,13 @@
         }
     }
 
-    .facebook-btn {
-        background-color: #3b5998;
-        color: white;
-        border: none;
-    }
+   
+    .error-message {
+        color: red;
+        margin-top: 10px; /* Adjust margin as needed */
+      }
 
-    .apple-btn {
-        background-color: black;
-        color: white;
-        border: none;
-    }
-
-    .google-btn,
-    .phn-btn {
-        border: 2px solid grey;
-        color: grey;
-        background-color: white;
-    }
+    
 
     .btn-login {
         width: 350px;
@@ -70,20 +68,6 @@
         color: white;
     }
 
-    .signup-btn {
-        width: 350px;
-        height: 45px;
-        border-radius: 20px;
-        font-weight: 500;
-        letter-spacing: 1px;
-        border: 2px solid grey;
-        color: grey;
-        background-color: white;
-    }
 
-    .frgt-pass {
-        text-decoration: underline;
-        font-weight: 500;
-        color: grey;
-    }
+
 }

@@ -20,11 +20,21 @@
     border: 2px solid white;
     height: 60px;
     margin: 10px;
+    color: white;
+}
+
+.mff-width.ng-touched {
+    /* Add styles you want to apply when the input is touched */
+    /* Example: */
+    border-color: #16181c; /* Change border color when touched */
 }
 .container{
     width: fit-content;
     padding: 20px 50px;
     text-align: center;
+    background-color: #16181c;
+    margin-bottom: 50px;
+    color:white;
     .heading{
         font-weight: bold;
     }
@@ -43,15 +53,11 @@
 
     }
 
-    .facebook-btn{
-        background-color: #3b5998;
-        color: white;
-        border: none;
-    }
+  
 }
 
 .signup-btn{
-    width: 400px;
+    width: 410px;
     height: 45px;
     border-radius: 20px;
     font-weight: 500;
@@ -72,7 +78,7 @@
 
 .chkbox{
     margin: 20px 0px;
-    text-align: left;
+    text-align: center;
 }
 
 .fsizesml{

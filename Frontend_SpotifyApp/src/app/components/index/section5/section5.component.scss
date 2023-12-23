@@ -1,19 +1,20 @@
-.sectn5{
+.sectn5 {
     background: linear-gradient(to bottom, #f037a6 0%, #6c0ee0 100%);
-    height: 450px;   
+    height: 450px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-        
-    h1{
+
+    h1 {
         color: white;
         font-weight: bold;
-        font-size: 80px; 
-        
+        font-size: 80px;
+        text-align: center;
+        margin-bottom: 20px;
     }
 
-    button{
+    button {
         height: 45px;
         width: 200px;
         margin-top: 30px;
@@ -23,4 +24,42 @@
         border: none;
     }
 
+    @media (max-width: 1200px) {
+        h1 {
+            font-size: 60px;
+        }
+    }
+
+    @media (max-width: 992px) {
+        h1 {
+            font-size: 50px;
+        }
+        button {
+            height: 40px;
+            width: 180px;
+            margin-top: 20px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 40px;
+        }
+        button {
+            height: 35px;
+            width: 160px;
+            margin-top: 15px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        h1 {
+            font-size: 30px;
+        }
+        button {
+            height: 30px;
+            width: 140px;
+            margin-top: 10px;
+        }
+    }
 }
