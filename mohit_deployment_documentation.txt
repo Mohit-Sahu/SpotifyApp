@@ -1,0 +1,128 @@
+Documentation for AWS-cloud deployment-
+(I used Ec2 for backend along with aws api-gateway and s3 for frontend along with cloudfront)
+
+Step1-
+   -Create database in RDS separatly for userprofile microservice and authentication service(also configure security group as per your port No)
+   -Use mongo-atlas or dyanamo db for mongodb databse or you can run it in ec2 as per convenience
+   
+  #After getting databases endpoints check it in your local by connecting it with Mysql-Workbench and check if it is storing data or not
+
+Step-2-
+    Launch an instance in ec2
+         -Linux operating System
+         -t3.large instance type
+         -1TB storage 
+   Install java 17 by below commands
+         java-
+         1. wget --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.rpm
+
+         2. sudo rpm -Uvh jdk-17_linux-x64_bin.rpm
+
+Step-3-
+    Assign the Public Ip of your instance to Elastic Ip 
+
+Step4-
+   Install Kafka in Ec2 instance that you had launched using following command-
+      1.wget https://archive.apache.org/dist/kafka/2.7.2/kafka_2.13-2.7.2.tgz
+      2.tar -xvf kafka_2.13-2.7.2.tgz
+      3.cd kafka_2.13-2.7.2
+      4.cd config
+      5.nano server.properties
+      6.Edit this file by uncomment listener and advertised listner part and provide elastic Ip address there
+      7.Save the file
+      8.bin/zookeeper-server-start.sh config/zookeeper.properties
+      9.bin/kafka-server-start.sh config/server.properties
+      10.Also make port -9092 public
+
+Step-5-
+   Create jar file of Eureka server and uplaod it in S3- bucket and import it using-
+       -wget your-object-url
+   Run this jar file using below command
+       -nohup java -jar your-object-url &
+
+Step-6-
+   Replace the localhost with elastic ip in all your microservices application.properties and test whether working fine or not in local.
+   If all working fine, create the file for all and upload it in s3 bucket
+     
+Step-7-
+   Import jar in ec2 and run it using following command for all-
+     -wget your-object-url
+   Run this jar file using below command
+       -nohup java -jar your-object-url &
+   Also configure the security group as per your port number  and test in swagger/postman whether all microservices are working or not
+
+
+Step-8
+  Use the elastic Ip in your angular frontend in place if localhost and test the app by running angular app locally
+
+Step-9
+  Then build your angular app using following command
+    -ng build
+    -a new dist folder will be created
+
+Step-10
+   Upload contents of dist folder in S-3 bucket and allow public access-
+eg.
+{
+
+    "Version": "2012-10-17",
+
+    "Statement": [
+
+        {
+
+            "Sid": "PublicReadObject",
+
+            "Effect": "Allow",
+
+            "Principal": "*",
+
+            "Action": "S3:GetObject",
+
+            "Resource": "arn:aws:s3:::day-23-amir-ass-1/*"
+
+        }
+
+
+
+
+Step-11
+   Test the navigation of your website by doing static website hosting in s3 bucket
+
+
+Till now our project is using http and we should convert that to https 
+Follow the below steps to convert it to https
+
+Step-11
+  Use AWS-Api-gateway to convert backend apis to https-
+     -Create new api-gateway
+     -create resources inside
+     -create methods as per your usecase eg.get,post,delete,update and enable CORS for all the methods
+  Test if Api-gateway is working from postman
+
+
+Steps-12
+   Replace elastic Ip from angular frontend with API-gateway urls and test it locally
+
+Steps-13
+   Again build the jar file and replace the files in S3 bucket and change the permisson to allow only https
+
+
+Step-14-
+   Create a distribution in Cloud Front and use your current s3 bucket which is hosting your website and deploy it
+
+Step-15-
+   Test your application by using cloud front url
+
+
+  
+  
+       
+
+
+    
+
+
+
+
+  
